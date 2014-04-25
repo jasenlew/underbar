@@ -41,10 +41,13 @@ var _ = {};
   _.last = function(array, n) {
     if (n > array.length) {
       n = array.length; 
+    } else if (n === 0) {
+      return [];
     }
 
-    return n === undefined ? array[array.length - 1] : array.slice(array.length - n, array.length);
+    return (n === undefined) ? array[array.length - 1] : array.slice(-n);
   };
+
 
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
@@ -101,6 +104,27 @@ var _ = {};
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+
+    var passed = _.filter(collection, test);
+    var failed = [];
+    var status = 0;
+
+    for (var i = 0, l = collection.length; i < l ; i += 1) {
+      for (var y = 0, z = passed.length; y < z; y += 1) {
+        if (passed[y] === collection[i]) {
+          status = 1;
+        }
+      }
+
+      if (status === 0) {
+        failed.push(collection[i]);
+      }
+
+      status = 0;
+    }
+
+    return failed;
+
   };
 
   // Produce a duplicate-free version of the array.
