@@ -41,9 +41,11 @@ var _ = {};
   _.last = function(array, n) {
     if (n > array.length) {
       n = array.length; 
+    } else if (n === 0) {
+      return [];
     }
 
-    return n === undefined ? array[array.length - 1] : array.slice(array.length - n, array.length);
+    return (n === undefined) ? array[array.length - 1] : array.slice(-n);
   };
 
 
