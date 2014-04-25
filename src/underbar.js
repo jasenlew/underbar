@@ -88,11 +88,11 @@ var _ = {};
 
     var passed = [];
 
-    for (var i = 0, l = collection.length; i < l; i += 1) {
-      if (test(collection[i])) {
-        passed.push(collection[i]);
+    _.each(collection, function (item) {
+      if (test(item)) {
+        passed.push(item);
       }
-    }
+    });  
 
     return passed;
 
