@@ -128,6 +128,23 @@ var _ = {};
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+
+    var dupFreeArr = [];
+    var temp;
+
+    _.each(array, function(item, index, array) {
+
+      temp = array.shift();
+
+     if (_.indexOf(array, temp) === -1) {
+        dupFreeArr.push(temp);
+     }
+        console.log("element: " + temp);
+        console.log("arr :" + dupFreeArr);
+    });
+
+    return dupFreeArr.sort();
+
   };
 
 
