@@ -66,6 +66,7 @@ var _ = {};
     }
   };
 
+
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
   _.indexOf = function(array, target){
@@ -83,6 +84,7 @@ var _ = {};
     return result;
   };
 
+
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
 
@@ -98,52 +100,45 @@ var _ = {};
 
   };
 
+
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
 
-    var passed = _.filter(collection, test);
-    var failed = [];
-    var status = 0;
-
-    _.each(collection, function(topItem) {
-      _.each(passed, function(bottomItem) {
-        if (topItem === bottomItem) {
-          status = 1;
-        }
-      });
-
-      if (status === 0) {
-        failed.push(topItem);
-      }
-
-      status = 0;
-
-    });
-
-    return failed;
+    var failTest = function (item) {
+      return !(test(item));
+    };
+    
+    return _.filter(collection, failTest);    
 
   };
+
+  // Elegant
+  // 
+  // _.reject = function(collection, test) {
+  // 
+  //   return _.filter(collection, function(item) {
+  //       return !test(item);
+  //   });
+  // 
+  // };
+  //
+
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
 
     var dupFreeArr = [];
-    var temp;
 
-    _.each(array, function(item, index, array) {
+    _.each(array, function(item) {
 
-      temp = array.shift();
-
-     if (_.indexOf(array, temp) === -1) {
-        dupFreeArr.push(temp);
-     }
-        console.log("element: " + temp);
-        console.log("arr :" + dupFreeArr);
+      if (_.indexOf(dupFreeArr, item) === -1) {
+        dupFreeArr.push(item);
+      }
     });
 
-    return dupFreeArr.sort();
+    return dupFreeArr;
 
   };
 
