@@ -107,19 +107,20 @@ var _ = {};
     var failed = [];
     var status = 0;
 
-    for (var i = 0, l = collection.length; i < l ; i += 1) {
-      for (var y = 0, z = passed.length; y < z; y += 1) {
-        if (passed[y] === collection[i]) {
+    _.each(collection, function(topItem) {
+      _.each(passed, function(bottomItem) {
+        if (topItem === bottomItem) {
           status = 1;
         }
-      }
+      });
 
       if (status === 0) {
-        failed.push(collection[i]);
+        failed.push(topItem);
       }
 
       status = 0;
-    }
+
+    });
 
     return failed;
 
