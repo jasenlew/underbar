@@ -114,17 +114,6 @@ var _ = {};
 
   };
 
-  // Elegant
-  // 
-  // _.reject = function(collection, test) {
-  // 
-  //   return _.filter(collection, function(item) {
-  //       return !test(item);
-  //   });
-  // 
-  // };
-  //
-
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
@@ -181,15 +170,17 @@ var _ = {};
   // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
 
-    var result = [];
-  
-    _.each(collection, function (item) {
-      result.push(functionOrKey.apply(item));
+    if (typeof functionOrKey === "function") {
+      return _.map(collection, function(item){
+        return functionOrKey.apply(item);
+      });
+   } else {
+      return _.map(collection, function(item){ debugger;
+        return item[functionOrKey].apply(item);
     });
+   }
 
-    return result;
-
-  };
+};
 
   // Reduces an array or object to a single value by repetitively calling
   // iterator(previousValue, item) for each item. previousValue should be
