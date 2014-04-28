@@ -196,7 +196,17 @@ var _ = {};
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
 
+    var previousValue = accumulator;
 
+    _.each(collection, function(item, index) {
+      if (previousValue === undefined && index === 0) {
+        previousValue = item;
+      } else {
+        previousValue = iterator(previousValue, item);
+      }
+    });
+
+    return previousValue;
 
   };
 

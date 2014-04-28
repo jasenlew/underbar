@@ -216,6 +216,20 @@ describe('reduce', function() {
     expect(total).to.equal(6);
   });
 
+  it('should be able to sum up an array without an initial value defined', function() {
+    var add = function(tally, item) {return tally + item; };
+    var total = _.reduce([1, 2, 3], add);
+
+    expect(total).to.equal(6);
+  });
+
+  it('should be able to sum up an array with an initial value (not zero) defined', function() {
+    var add = function(tally, item) {return tally + item; };
+    var total = _.reduce([1, 2, 3], add, 3);
+
+    expect(total).to.equal(9);
+  });
+
 });
 
 describe('contains', function() {
