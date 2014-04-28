@@ -86,7 +86,7 @@ var _ = {};
 
 
   // Return all elements of an array that pass a truth test.
-  _.filter = function(collection, test) {
+  _.filter = function(collection, test) { 
 
     var passed = [];
 
@@ -140,8 +140,8 @@ var _ = {};
 
     var arr = [];
 
-    _.each(collection, function (params) {
-      arr.push(iterator(params));
+    _.each(collection, function (item) {
+      arr.push(iterator(item));
     });
 
     return arr;
@@ -171,16 +171,15 @@ var _ = {};
   _.invoke = function(collection, functionOrKey, args) {
 
     if (typeof functionOrKey === "function") {
-      return _.map(collection, function(item){
-        return functionOrKey.apply(item);
+      return _.map(collection, function(item) {
+        return functionOrKey.apply(item, args);
       });
-   } else {
-      return _.map(collection, function(item){ debugger;
-        return item[functionOrKey].apply(item);
-    });
-   }
-
-};
+    } else {
+      return _.map(collection, function(item) {
+        return item[functionOrKey].apply(item, args);
+      });
+    }
+  };
 
   // Reduces an array or object to a single value by repetitively calling
   // iterator(previousValue, item) for each item. previousValue should be
@@ -196,6 +195,9 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
+
+
+
   };
 
   // Determine if the array or object contains a given value (using `===`).
