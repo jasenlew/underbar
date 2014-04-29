@@ -228,9 +228,7 @@ var _ = {};
     // TIP: Try re-using reduce() here.
 
 
-
-
-
+    //******* NEED TO COMPLETE
 
   
     return _.reduce(collection, function (previousValue, item) {
@@ -278,7 +276,18 @@ var _ = {};
       });
     }
     
+    /*** Abstracting away the for-loop
+      *   var allArgsButFirst = Array.prototype.slice.apply(arguments, [1]);
+      *
+      *   _.each(allArgsButFirst, function (objparam) {
+      *     _.each(objparam, function (value, key) {
+      *       obj[key] = value;
+      *     });
+      *   });
+     ***/
+
     return obj;
+
   };
 
 
@@ -286,7 +295,16 @@ var _ = {};
   // exists in obj
   _.defaults = function(obj) {
 
+  
+    for (var i = 1, l = arguments.length; i < l; i += 1) {
+      _.each(arguments[i], function(value, key) {
+        if (obj[key] === undefined) {
+          obj[key] = value;
+        }
+      });
+    }
 
+    return obj;
 
   };
 
