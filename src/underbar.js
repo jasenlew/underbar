@@ -226,6 +226,12 @@ var _ = {};
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+
+
+
+
+
+
   
     return _.reduce(collection, function (previousValue, item) {
       if (iterator !== "function") {
@@ -265,11 +271,23 @@ var _ = {};
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    
+    for (var i = 1, l = arguments.length; i < l; i += 1) {
+      _.each(arguments[i], function(value, key) {
+        obj[key] = value;
+      });
+    }
+    
+    return obj;
   };
+
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+
+
+
   };
 
 
