@@ -244,7 +244,19 @@ var _ = {};
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
 
+    if (!iterator) {
+      iterator = _.identity;
+    }
 
+    return _.reduce(collection, function (previousValue, item) {
+      if (typeof iterator !== "function") {
+        return Boolean(item);
+      } else if (previousValue || Boolean(iterator(item))) {
+        return true;
+      } else {
+        return false;
+      }
+    }, false);
 
   };
 
