@@ -359,9 +359,17 @@ var _ = {};
   // instead if possible.
   _.memoize = function(func) {
 
+    var originalArgs;
+    var result;
 
-
-    return func;
+    return function() {
+      if (originalArgs !== arguments[0]) {
+        originalArgs = arguments[0];
+        return result = func.apply(this, arguments);
+      } else {
+        return result;
+      }
+    };
 
   };
 
@@ -372,6 +380,9 @@ var _ = {};
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+
+
+
   };
 
 
