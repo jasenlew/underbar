@@ -359,19 +359,22 @@ var _ = {};
   // instead if possible.
   _.memoize = function(func) {
 
-    var originalArgs;
-    var result;
-
+    var originalArgs = {};
+    
     return function() {
-      if (originalArgs !== arguments[0]) {
-        originalArgs = arguments[0];
-        return result = func.apply(this, arguments);
-      } else {
-        return result;
-      }
-    };
 
+      var key = arguments[0]; 
+
+      if (originalArgs[key] === undefined) {
+        originalArgs[key] = func.apply(this, arguments);
+        return originalArgs[key];
+      } else {
+        return originalArgs[key];
+      }
+ 
+    };
   };
+
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
