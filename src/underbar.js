@@ -384,11 +384,13 @@ var _ = {};
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
 
-    var myArgs = [];
+    // var myArgs = [];
 
-    for (var i = 2, l = arguments.length; i < l; i += 1) {
-      myArgs.push(arguments[i]);
-    }
+    // for (var i = 2, l = arguments.length; i < l; i += 1) {
+    //   myArgs.push(arguments[i]);
+    // }
+
+    var myArgs = Array.prototype.slice.call(arguments, 2);
 
     setTimeout(function(){
       func.apply(this, myArgs);
